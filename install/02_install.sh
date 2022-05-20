@@ -6,7 +6,7 @@
 
 #sudo apt-get install libncurses-dev
 #sudo apt-get install libffi-dev
-
+#sudo apt-get install gfortran
 
 # Directories used in installations
 STARTDIR=$(pwd)
@@ -43,4 +43,71 @@ if [ ! -d "$HOME/opt/vim/" ]; then
     # Install Vim plugins using VimPlug
     vim +PlugInstall +qall
 fi
+
+
+e/configure --prefix=$HOME/opt/R '--with-cairo' '--with-jpeglib' '--with-readline' '--with-tcltk' '--with-blas' '--with-lapack' '--enable-R-profiling' '--enable-R-shlib' '--enable-memory-profiling'
+make install -j
+
+
+
+
+sudo apt install cmake -y
+curl https://codeload.github.com/thewtex/tmux-mem-cpu-load/tar.gz/refs/tags/v3.5.1 > ~/opt/tmux-mem-cpu-load_3.5.1.tar.gz
+untargz ~/opt/tmux-mem-cpu-load_3.5.1.tar.g
+cd ~/opt/tmux-mem-cpu-load_3.5.1.tar.g
+cmake -DCMAKE_INSTALL_PREFIX:PATH=~/opt/tmux/tmux-mem-cpu-load-3.5.1 .
+make -j
+make install -j
+
+
+
+wget https://cran.r-project.org/src/base/R-4/R-4.1.2.tar.gz
+gunzip R-4.1.2.tar.gz
+ll
+tar R
+tar -h
+ll
+rm R-4.1.2.tar
+gunzip R-4.1.2.tar.gz
+wget https://cran.r-project.org/src/base/R-4/R-4.1.2.tar.gz
+wget https://www.python.org/ftp/python/3.9.8/Python-3.9.8.tgz
+ll
+tmux ls
+tmux -a 0
+tmux attach -t 0
+ll
+source ~/.bash_profile
+untargz R-4.1.2.tar.gz
+ll
+cd R-4.1.2/
+
+
+sudo apt install build-essential
+sudo apt-get install gfortran
+./configure
+sudo apt-get install libreadline-dev
+sudo apt-get install build-essential fort77 xorg-dev liblzma-dev libblas-dev gfortran gcc-mu
+ltilib gobjc++ aptitude libreadline-dev libbz2-dev libpcre2-dev libcurl4 libcurl4-openssl-dev default-jre default-jdk openjdk-8-jdk openjdk-8-jre -y
+./configure
+./configure --help
+./configure --with-x=no --prefix="$HOME/opt/vim"
+make -j
+sudo apt-get install libbz2-dev
+sudo apt-get install libX11-dev
+sudo apt-get install xorg-x11-server-dev
+sudo apt-get install libXt-dev
+sudo apt-get install xorg-dev
+./configure --prefix=/opt/R '--with-cairo' '--with-jpeglib' '--with-readline' '--with-tcltk'
+ '--with-blas' '--with-lapack' '--enable-R-profiling' '--enable-R-shlib' '--enable-memory-profiling'
+sudo apt-get install liblzma
+sudo apt-get install lzma
+sudo apt-get install liblzma-dev
+./configure --prefix=/opt/R '--with-cairo' '--with-jpeglib' '--with-readline' '--with-tcltk'
+ '--with-blas' '--with-lapack' '--enable-R-profiling' '--enable-R-shlib' '--enable-memory-profiling'
+sudo apt-get install build-essential fort77 xorg-dev liblzma-dev libblas-dev gfortran gcc-multilib gobjc++ aptitude libreadline-dev libbz2-dev libpcre2-dev libcurl4 libcurl4-openssl-dev default-jre default-jdk openjdk-8-jdk openjdk-8-jre -y
+sudo apt-get install build-essential fort77 xorg-dev liblzma-dev libblas-dev gfortran gobjc++ aptitude libreadline-dev libbz2-dev libpcre2-dev libcurl4 libcurl4-openssl-dev default-jre default-jdk openjdk-8-jdk openjdk-8-jre -y
+./configure --prefix=/opt/R '--with-cairo' '--with-jpeglib' '--with-readline' '--with-tcltk' '--with-blas' '--with-lapack' '--enable-R-profiling' '--enable-R-shlib' '--enable-memory-profiling'
+sudo apt-get install texlive texlive-fonts-extra texinfo
+
+
 
