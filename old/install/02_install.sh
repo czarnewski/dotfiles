@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 # Script for installing Python 3, Vim, Conda and Nextflow into `$HOME/opt/` for
 # increased portability as well as solving problems with Python libraries for
 # some Vim plugins (e.g. YouCompleteMe and UltiSnips) on the Uppmax cluster
@@ -7,6 +9,25 @@
 #sudo apt-get install libncurses-dev
 #sudo apt-get install libffi-dev
 #sudo apt-get install gfortran
+
+# Get the current system
+if [ $(uname) == "Darwin" ]; then
+  SYS="MacOSX"
+elif [ $(uname) == "Linux" ]; then
+  SYS="Linux"
+fi
+
+# Get the current archtecture
+if [ $(arch) == "i386" ]; then
+  ARCH="x86_64"
+elif [ $(arch) == "aarch64" ]; then
+  ARCH="aarch64"
+  wget https://github.com/conda-forge/miniforge/releases/download/4.12.0-0/Miniforge3-$SYS-$ARCH.sh
+fi
+
+
+
+
 
 # Directories used in installations
 STARTDIR=$(pwd)
@@ -48,6 +69,8 @@ fi
 e/configure --prefix=$HOME/opt/R '--with-cairo' '--with-jpeglib' '--with-readline' '--with-tcltk' '--with-blas' '--with-lapack' '--enable-R-profiling' '--enable-R-shlib' '--enable-memory-profiling'
 make install -j
 
+
+curl -o Miniconda3-latest-MacOSX-x86_64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 
 
 

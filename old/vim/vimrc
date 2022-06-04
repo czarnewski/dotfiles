@@ -105,7 +105,7 @@ map <leader>tp :tabp<cr>        " To switch to previous tab.
 
 " Syntax Highlighting: {{{1
 syntax enable
-colorscheme jellybeans
+colorscheme xxxxx:qjellybean
 set background=dark
 
 " Errors
