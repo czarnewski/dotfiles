@@ -1,0 +1,104 @@
+" Vim Run Commands file
+" Author: Paulo Czarnewski
+" Special: Erik Fasterius
+
+" Backups: {{{1
+
+
+" General Key Mappings: {{{1
+"Set Leaders:
+let maplocalleader = '.'
+let mapleader = ','
+
+"Re-source VIMRC
+nmap <Leader>v :source $MYVIMRC <CR>
+
+set backspace=indent,eol,start
+" Plugins: {{{1
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+
+
+Plug 'preservim/nerdtree'
+Plug 'Raimondi/delimitMate'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+
+Plug 'rakr/vim-one'
+Plug 'sainnhe/edge'
+
+call plug#end()
+
+
+set completeopt=longest,menuone
+":inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+""  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+"inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+""  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+
+
+" Miscellaneous: {{{1
+" Add line numbers
+set relativenumber
+set number
+
+" Add background highlight to current line
+set cursorline
+
+" Wrap lines at 80 characters
+set textwidth=80
+set formatoptions+=t
+
+" Use UTF-8 encoding
+set encoding=utf-8
+
+
+map <leader>nt :tabnew<cr>    " To create a new tab.
+map <leader>to :tabonly<cr>     " To close all other tabs (show only the current tab).
+map <leader>tc :tabclose<cr>    " To close the current tab.
+map <leader>tm :tabmove<cr>     " To move the current tab to next position.
+map <leader>tn :tabn<cr>        " To swtich to next tab.
+map <leader>tp :tabp<cr>        " To switch to previous tab.
+
+" Use the same indentation as currently on for new lines
+
+" Syntax Highlighting: {{{1
+syntax enable
+colorscheme vim-monokai-tasty
+set background=dark
+set background=light
+colorscheme one
+" Errors
+set noerrorbells                " No annoying sound on errors.
+
+
+" TAB settings: {{{1
+
+set tabstop=2 " <TAB> is 2 spaces wide
+set smarttab " To use smart tabs.
+set autoindent " To copy indentation from current line
+set expandtab " <TAB is expanded to spaces
+set shiftwidth=2 " Use 2 spaces when indenting with '>'
+
+set foldmethod=marker
+" filetype indent on
+" filetype plugin indent on
+set shiftwidth=2
+set si
+set ai
+
+" Files & Backup
+set nobackup                     " Turn off backup.
+set nowb                         " Don't backup before overwriting a file.
+set noswapfile                   " Don't create a swap file.
+set ffs=unix,dos,mac             " Use Unix as the standard file type.

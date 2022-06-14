@@ -1,0 +1,2 @@
+
+Plug 'rakr/vim-one'

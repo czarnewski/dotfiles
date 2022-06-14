@@ -1,0 +1,70 @@
+" Vim Run Commands file
+" Author: Paulo Czarnewski
+" Special: Erik Fasterius
+
+" Plugins: {{{1
+
+source ~/.dotfiles/vim/plugins/vimplug.vim
+
+call plug#begin('~/.vim/plugged')
+
+source ~/.dotfiles/vim/plugins/coc.vim
+" source ~/.dotfiles/vim/plugins/vim-one.vim
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'jalvesaq/Nvim-R',               {'branch': 'stable'}
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
+
+call plug#end()
+
+
+" Color Scheme: {{{1
+
+set background=light
+colorscheme vim-monokai-tasty
+set guicursor=
+set showcmd
+
+" General Key Mappings: {{{1
+
+
+" Line numbers
+set number
+set relativenumber
+set foldmethod=marker
+set noerrorbells                " No annoying sound on errors.
+
+
+" TAB settings: {{{1
+
+set tabstop=2    " <TAB> is 2 spaces wide
+set smarttab     " To use smart tabs.
+set autoindent   " To copy indentation from current line
+set expandtab    " <TAB is expanded to spaces
+set shiftwidth=2 " Use 2 spaces when indenting with '>'
+
+" Files & Backup {{{1
+set nobackup                     " Turn off backup.
+set nowb                         " Don't backup before overwriting a file.
+set noswapfile                   " Don't create a swap file.
+set ffs=unix,dos,mac             " Use Unix as the standard file type.
+set encoding=utf-8
+set backspace=indent,eol,start
+
+
+" General Key Mappings: {{{1
+"Set Leaders:
+let maplocalleader = '.'
+let mapleader = '\<space>'
+
+set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+
+nnoremap <tab> <c-x><c-o>
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <TAB> <c-x><c-o>
+
+
+
+
+
