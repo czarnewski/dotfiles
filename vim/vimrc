@@ -3,6 +3,11 @@
 " Special: Erik Fasterius
 
 
+
+"Set Leaders:
+let maplocalleader = ','
+let mapleader = " "
+
 set guioptions-=e
 set laststatus=2
 filetype indent on
@@ -12,11 +17,15 @@ set foldcolumn=2
 
 source ~/.dotfiles/vim/plugins/vimplug.vim
 
+
 call plug#begin('~/.vim/plugged')
 
 source ~/.dotfiles/vim/plugins/coc.vim
-source ~/.dotfiles/vim/plugins/vim-one.vim
+source ~/.dotfiles/vim/plugins/vimone.vim
+" source ~/.dotfiles/vim/plugins/nerdtree.vim
 
+
+Plug 'preservim/nerdtree'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'jalvesaq/Nvim-R'
@@ -26,7 +35,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
-Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 
 Plug 'jremmen/vim-ripgrep'
@@ -62,6 +70,17 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'preservim/nerdcommenter'
 call plug#end()
 
+
+
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
+let g:NERDTreeDirArrowExpandable='▷'
+let g:NERDTreeDirArrowCollasible='▽'
+
+nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' ? ':NERDTree<cr>' : ':NERDTreeFind<cr>'
+nmap <leader>N :NERDTreeFind
+
+
 " FastFold
 let g:markdown_folding = 1
 let g:r_syntax_folding = 1
@@ -72,7 +91,7 @@ let g:zsh_fold_enable = 1
 
 " Color Scheme: {{{1
 set splitright
-set clipboard=unnamedplus
+set clipboard=unnamed
 set background=light
 colorscheme one
 set guicursor=
@@ -134,9 +153,8 @@ au FileType rmd setlocal conceallevel=0
 
 
 " General Key Mappings: {{{1
-"Set Leaders:
-let maplocalleader = ','
-let mapleader = ' ' " <space>
+
+
 
 filetype plugin on
 " Create default mappings
@@ -149,14 +167,6 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 
 let g:NERDCustomDelimiters = { 'r': { 'left': '#','right': '' } }
-
-
-nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' ? ':NERDTree<cr>' : ':NERDTreeFind<cr>'
-nmap <leader>N :NERDTreeFind
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-let g:NERDTreeDirArrowExpandable='▷'
-let g:NERDTreeDirArrowCollasible='▽'
 
 set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 
