@@ -2,6 +2,12 @@
 " Author: Paulo Czarnewski
 " Special: Erik Fasterius
 
+
+set guioptions-=e
+set laststatus=2
+filetype indent on
+set foldcolumn=2
+
 " Plugins: {{{1
 
 source ~/.dotfiles/vim/plugins/vimplug.vim
@@ -9,22 +15,74 @@ source ~/.dotfiles/vim/plugins/vimplug.vim
 call plug#begin('~/.vim/plugged')
 
 source ~/.dotfiles/vim/plugins/coc.vim
-" source ~/.dotfiles/vim/plugins/vim-one.vim
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'jalvesaq/Nvim-R',               {'branch': 'stable'}
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-rmarkdown'
+source ~/.dotfiles/vim/plugins/vim-one.vim
 
+Plug 'prabirshrestha/vim-lsp'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'jalvesaq/Nvim-R'
+Plug 'farmergreg/vim-lastplace'  " Opens vim where you left off
+Plug 'tpope/vim-projectionist'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'preservim/nerdtree'
+Plug 'vimwiki/vimwiki'
+
+Plug 'jremmen/vim-ripgrep'
+
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'itchyny/lightline.vim'
+Plug 'bagrat/vim-buffet'
+
+Plug 'ap/vim-css-color'
+
+
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'roxma/vim-hug-neovim-rpc'
+" Plug 'ncm2/ncm2-bufword'
+
+
+Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
+
+Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-rmarkdown'
+
+Plug 'chrisbra/Colorizer'
+
+Plug 'Konfekt/FastFold'
+Plug 'tmhedberg/SimpylFold'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
+" FastFold
+let g:markdown_folding = 1
+let g:r_syntax_folding = 1
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:zsh_fold_enable = 1
 
 " Color Scheme: {{{1
-
+set splitright
+set clipboard=unnamedplus
 set background=light
-colorscheme vim-monokai-tasty
+colorscheme one
 set guicursor=
 set showcmd
+
+" NCM2
+" autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
+" set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
+"                                                    " information.
+
 
 " General Key Mappings: {{{1
 
@@ -32,17 +90,18 @@ set showcmd
 " Line numbers
 set number
 set relativenumber
-set foldmethod=marker
 set noerrorbells                " No annoying sound on errors.
-
-
 " TAB settings: {{{1
 
+set mouse=a
+set hlsearch
 set tabstop=2    " <TAB> is 2 spaces wide
 set smarttab     " To use smart tabs.
 set autoindent   " To copy indentation from current line
 set expandtab    " <TAB is expanded to spaces
 set shiftwidth=2 " Use 2 spaces when indenting with '>'
+set foldmethod=marker
+" setlocal foldmethod=syntax
 
 " Files & Backup {{{1
 set nobackup                     " Turn off backup.
@@ -52,19 +111,167 @@ set ffs=unix,dos,mac             " Use Unix as the standard file type.
 set encoding=utf-8
 set backspace=indent,eol,start
 
+" Styling configurations: {{{1
+set colorcolumn=81,161
+highlight ColorColumn ctermbg=grey
+" autocmd FileType markdown set conceallevel=0
+" autocmd FileType rmarkdown set conceallevel=0
+" set conceallevel=0
+" autocmd FileType rmarkdown set concealddlevel=0
+let g:vim_markdown_conceal = 0
+set spell spelllang=en_us
+setlocal spell spelllang=en_us
+
+let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#codeblocks#embeds#langs = ['r']
+let g:vim_r_syntax_conceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+set conceallevel=0
+
+au FileType rmarkdown setlocal conceallevel=0
+au FileType rmd setlocal conceallevel=0
+
 
 " General Key Mappings: {{{1
 "Set Leaders:
-let maplocalleader = '.'
-let mapleader = '\<space>'
+let maplocalleader = ','
+let mapleader = ' ' " <space>
+
+filetype plugin on
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+let g:NERDCustomDelimiters = { 'r': { 'left': '#','right': '' } }
+
+
+nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' ? ':NERDTree<cr>' : ':NERDTreeFind<cr>'
+nmap <leader>N :NERDTreeFind
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
+let g:NERDTreeDirArrowExpandable='▷'
+let g:NERDTreeDirArrowCollasible='▽'
 
 set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 
 nnoremap <tab> <c-x><c-o>
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <TAB> <c-x><c-o>
+" inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <TAB> <c-x><c-o>
+
+let R_rconsole_height = winheight(0) / 3
+autocmd VimResized * let R_rconsole_height = winheight(0) / 3
+let R_rconsole_width = 0
+
+
+
+
+set nocompatible
+filetype plugin on
+syntax on
+let g:vimwiki_list = [{
+  \ 'path'   : '~/.dotfiles/vim/vimwiki',
+  \ 'syntax' : 'markdown',
+  \ 'ext'    : '.md'}]
+
+
+" Pandoc Config: {{{1
+let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
+let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
+
+
+" Markdown codeblock: {{{1
+" hi markdownCodeBlockBG ctermbg=254
+" sign define codeblock linehl=markdownCodeBlockBG
+
+" function! MarkdownBlocks()
+"     let l:continue = 0
+"     execute "sign unplace * file=".expand("%")
+
+"     " iterate through each line in the buffer
+"     for l:lnum in range(1, len(getline(1, "$")))
+"         " detect the start fo a code block
+"         if getline(l:lnum) =~ "^```.*$" || l:continue
+"             " continue placing signs, until the block stops
+"             let l:continue = 1
+"             " place sign
+"             execute "sign place ".l:lnum." line=".l:lnum." name=codeblock file=".expand("%")
+"             " stop placing signs
+"             if getline(l:lnum) =~ "^```$"
+"                 let l:continue = 0
+"             endif
+"         endif
+"     endfor
+" endfunction
 
 
 
 
 
+au FileType markdown syn region myMkdHeaderFold
+        \ start="\v^\s*\z(\#{1,6})"
+        \ skip="\v(\n\s*\z1\#)\@="
+        \ end="\v\n(\s*\#)\@="ms=s-1,me=s-1
+        \ fold contains=myMkdHeaderFold
+
+au FileType markdown syn sync fromstart
+au FileType markdown set foldmethod=syntax
+
+
+
+
+" Use signs to highlight code blocks
+" Set signs on loading the file, leaving insert mode, and after writing it
+" au InsertLeave *.rmd call MarkdownBlocks()
+" au BufEnter *.rmd call MarkdownBlocks()
+" au BufWritePost *.rmd call MarkdownBlocks()
+let g:R_assign = 0
+" settings :: Nvim-R plugin
+" R output is highlighted with current colorschemelet 
+let g:rout_follow_colorscheme = 1
+" R commands in R output are highlightedlet 
+let g:Rout_more_colors = 1
+
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+
+
+
+
+
+
+set nocompatible 
+set showcmd
+
+command! -bang -nargs=? -complete=dir Files 
+  \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({'dir':<q-args>, 'sink':'tabnew', 'source':'rg --files --hidden'}), <bang>0))
+
+command! -bang -nargs=? -complete=dir AllFiles 
+  \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({'dir':<q-args>, 'sink':'tabnew', 'source':'rg --files --hidden --no-ignore'}), <bang>0))
+
+nmap <leader>f :Files<cr>
+nmap <leader>F :AllFiles<cr> 
+
+let g:fzf_action = {
+  \ '<cr>'  : 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+nmap <leader>vp :tabnew ~/.dotfiles/vim/vimrc<cr>
+nmap <leader>svp :source ~/.dotfiles/vim/vimrc<cr>
+nmap gf :tabnew <cfile><cr>
+" nmap gr :tabnew <cfile><cr>
+nmap gF :e#<cr>
+
+" These lines offer support to autocompletion on the VIM's buffer line
+set wildmenu
+set wildmode=longest:full,full
+set wildoptions=pum
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')

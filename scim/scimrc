@@ -1,0 +1,19 @@
+set autocalc
+set numeric
+set numeric_decimal=0
+set overlap
+set xlsx_readformulas
+DEFINE_COLOR "GREY90" 229 229 229
+DEFINE_COLOR "GREY80" 208 208 208
+DEFINE_COLOR "GREY70" 166 166 166
+DEFINE_COLOR "GREY50" 126 126 126
+color "type=HEADINGS fg=GREY70 bg=GREY80"
+color "type=HEADINGS_ODD fg=GREY70 bg=GREY80"
+color "type=NUMB fg=BLACK bg=GREY90"
+color "type=STRG fg=BLACK bg=GREY90"
+color "type=DATEF fg=BLACK bg=GREY90"
+color "type=CELL_SELECTION fg=BLACK bg=GREY80"
+color "type=GRID_EVEN fg=BLACK bg=GREY90"
+color "type=GRID_ODD fg=BLACK bg=GREY90"
+
+

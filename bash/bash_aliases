@@ -17,7 +17,7 @@ alias sbp='source ~/.bash_profile'
 
 # VIM
 alias vp='vim ~/.dotfiles/vim/vimrc'
-
+alias scim='sc-im'
 
 # TMUX
 alias tp='vim ~/.tmux.conf'
@@ -25,6 +25,14 @@ alias ta='tmux attach -t'
 alias tk='tmux kill-server'
 alias tls='tmux ls'
 alias stp='tmux source-file ~/.tmux.conf'
+
+
+# CONDA
+alias cel='conda env list'
+alias cer='conda env remove -n'
+alias cac='conda activate'
+alias cde='conda deactivate'
+alias mec='mamba env create'
 
 
 # GIT
@@ -48,3 +56,9 @@ alias untargz='tar -xvzf'
 alias opa='source ~/opt/octoprint/bin/activate'
 alias opk='pgrep octoprint | xargs kill -9; deactivate'
 alias op='opa; ~/opt/octoprint/bin/octoprint serve'
+
+
+
+# SOFTWARE
+alias chrome="open -e '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'"
+

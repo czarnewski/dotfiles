@@ -12,9 +12,21 @@ source ~/.dotfiles/bash/bash_aliases
 export PS1="\[\e[;32m\][\u@\h \W]\$ \[\e[m\]"
 
 
+
+####################
+### EXPORT PATHS ###
+####################
+export PATH="~/Library/Python/latest/bin:$PATH"
+
+~/Library/
+
+
 #############
 ### CONDA ###
 #############
+
+
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/Czarnewski/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -27,3 +39,5 @@ else
     fi
 fi
 unset __conda_setup
+# <<< conda initialize <<<
+
