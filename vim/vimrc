@@ -8,6 +8,7 @@
 let maplocalleader = ','
 let mapleader = " "
 
+
 set guioptions-=e
 set laststatus=2
 filetype indent on
@@ -17,52 +18,44 @@ set foldcolumn=2
 
 source ~/.dotfiles/vim/plugins/vimplug.vim
 
-
 call plug#begin('~/.vim/plugged')
-
 source ~/.dotfiles/vim/plugins/coc.vim
-source ~/.dotfiles/vim/plugins/vimone.vim
-" source ~/.dotfiles/vim/plugins/nerdtree.vim
+source ~/.dotfiles/vim/plugins/nerdtree.vim
+source ~/.dotfiles/vim/plugins/fzf.vim
+source ~/.dotfiles/vim/plugins/git.vim
+source ~/.dotfiles/vim/plugins/lightline.vim
 
+" source ~/.dotfiles/vim/plugins/color_scheme.vim
+source ~/.dotfiles/vim/plugins/code_folding.vim
+" source ~/.dotfiles/vim/plugins/git.vim
+" source ~/.dotfiles/vim/plugins/git.vim
+" source ~/.dotfiles/vim/plugins/git.vim
 
-Plug 'preservim/nerdtree'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'rakr/vim-one'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'jalvesaq/Nvim-R'
 Plug 'farmergreg/vim-lastplace'  " Opens vim where you left off
 Plug 'tpope/vim-projectionist'
 Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'vimwiki/vimwiki'
-
 Plug 'jremmen/vim-ripgrep'
-
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-
 Plug 'jiangmiao/auto-pairs'
-
-Plug 'itchyny/lightline.vim'
 Plug 'bagrat/vim-buffet'
-
 Plug 'ap/vim-css-color'
-
-
 " Plug 'ncm2/ncm2'
 " Plug 'roxma/nvim-yarp'
 " Plug 'roxma/vim-hug-neovim-rpc'
 " Plug 'ncm2/ncm2-bufword'
-
-
 Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
-
+Plug 'preservim/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
 " Plug 'vim-pandoc/vim-rmarkdown'
-
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'chrisbra/Colorizer'
 
 Plug 'Konfekt/FastFold'
@@ -72,28 +65,16 @@ call plug#end()
 
 
 
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-let g:NERDTreeDirArrowExpandable='▷'
-let g:NERDTreeDirArrowCollasible='▽'
-
-nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' ? ':NERDTree<cr>' : ':NERDTreeFind<cr>'
-nmap <leader>N :NERDTreeFind
 
 
-" FastFold
-let g:markdown_folding = 1
-let g:r_syntax_folding = 1
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:zsh_fold_enable = 1
+
 
 " Color Scheme: {{{1
+
+colorscheme one
+set background=light
 set splitright
 set clipboard=unnamed
-set background=light
-colorscheme one
 set guicursor=
 set showcmd
 
@@ -255,24 +236,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
 
-
-set nocompatible 
-set showcmd
-
-command! -bang -nargs=? -complete=dir Files 
-  \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({'dir':<q-args>, 'sink':'tabnew', 'source':'rg --files --hidden'}), <bang>0))
-
-command! -bang -nargs=? -complete=dir AllFiles 
-  \ call fzf#run(fzf#wrap('files', fzf#vim#with_preview({'dir':<q-args>, 'sink':'tabnew', 'source':'rg --files --hidden --no-ignore'}), <bang>0))
-
-nmap <leader>f :Files<cr>
-nmap <leader>F :AllFiles<cr> 
-
-let g:fzf_action = {
-  \ '<cr>'  : 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
 nmap <leader>vp :tabnew ~/.dotfiles/vim/vimrc<cr>
 nmap <leader>svp :source ~/.dotfiles/vim/vimrc<cr>
 nmap gf :tabnew <cfile><cr>
@@ -285,3 +248,15 @@ set wildmode=longest:full,full
 set wildoptions=pum
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+
+" .............................................................................
+" iamcco/markdown-preview.nvim
+" .............................................................................
+
+let g:mkdp_auto_close=0
+let g:mkdp_refresh_slow=1
+" let g:mkdp_markdown_css=fnameescape($HOME).'/.local/lib/github-markdown-css/github-markdown.css'
+
+
+

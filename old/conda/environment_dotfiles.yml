@@ -7,6 +7,9 @@ channels:
 dependencies:
  - r-base>=4.1
  - r-languageserver
+ - r-curl
+ - r-future
+ - r-future.apply
  - python>=3.10
  - vim>=8.2
  - conda
