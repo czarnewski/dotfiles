@@ -10,6 +10,12 @@ alias cd.='cd ..'
 alias disks='lsblk'
 
 
+# DEEPLIFE
+alias PBS='paucza@89.225.233.66'
+alias pbs='ssh -p 10023 $PBS'
+
+
+
 # BASH
 alias bp='vim ~/.bash_profile'
 alias sbp='source ~/.bash_profile'
@@ -18,6 +24,7 @@ alias sbp='source ~/.bash_profile'
 # VIM
 alias vp='vim ~/.dotfiles/vim/vimrc'
 alias scim='sc-im'
+
 
 # TMUX
 alias tp='vim ~/.tmux.conf'

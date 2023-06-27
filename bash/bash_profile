@@ -3,14 +3,14 @@
 ###############
 ### ALIASES ###
 ###############
-source ~/.dotfiles/bash/bash_aliases
+source ~/dotfiles/bash/bash_aliases
 
 
 ##############
 ### PROMPT ###
 ##############
 export PS1="\[\e[;32m\][\u@\h \W]\$ \[\e[m\]"
-
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
 ####################
@@ -21,20 +21,21 @@ export PATH=${PATH}:/Users/Czarnewski/edirect
 export PATH=$PATH:$HOME/edirect
 
 
-#############
-### CONDA ###
-#############
+
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/Czarnewski/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/pauloczarnewski/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/Czarnewski/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/Czarnewski/opt/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/pauloczarnewski/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/pauloczarnewski/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/Czarnewski/opt/miniconda3/bin:$PATH"
+        export PATH="/Users/pauloczarnewski/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
