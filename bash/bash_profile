@@ -3,14 +3,14 @@
 ###############
 ### ALIASES ###
 ###############
-source ~/dotfiles/bash/bash_aliases
+source ~/.dotfiles/bash/bash_aliases
 
-wait
 
 ##############
 ### PROMPT ###
 ##############
-export PS1="\[\e[;32m\][\u@\h \W]\$ \[\e[m\]"
+# export PS1="\[\e[;32m\][\u@\h \W]\$ \[\e[m\]"
+export PS1="\[\e[;32m\]\W $ \[\e[m\]"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
@@ -40,3 +40,13 @@ unset __conda_setup
 
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/pauloczarnewski/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/pauloczarnewski/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/pauloczarnewski/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/pauloczarnewski/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+
+# SETS TERMINAL LANGUAGE TO ENGLISH
+export LC_ALL=en_US.UTF-8

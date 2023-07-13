@@ -11,23 +11,27 @@ alias disks='lsblk'
 
 
 # DEEPLIFE
-alias PBS='paucza@89.225.233.66'
+PBS='paucza@89.225.233.66'
 alias pbs='ssh -p 10023 $PBS'
 
 
+# VSCODE
+alias r="radian"
+alias rp='nvim ~/.Rprofile'
+
 
 # BASH
-alias bp='vim ~/.bash_profile'
+alias bp='nvim ~/.bash_profile'
 alias sbp='source ~/.bash_profile'
 
 
 # VIM
-alias vp='vim ~/.dotfiles/vim/vimrc'
+alias vp='nvim ~/.dotfiles/nvim/init.vim'
 alias scim='sc-im'
 
 
 # TMUX
-alias tp='vim ~/.tmux.conf'
+alias tp='nvim ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tk='tmux kill-server'
 alias tls='tmux ls'
