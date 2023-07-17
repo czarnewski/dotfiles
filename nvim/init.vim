@@ -1,31 +1,52 @@
+" VIM CONFIGURATION FILE
+" Paulo Czarnewski
 
-set nocompatible
+" FUNCTIONS: {{{1
 
-" Movement: {{{1
-
-
-" Use CTRL-<hjkl> to move between vim terminals
-tnoremap <C-j> <C-w><C-j>
-tnoremap <C-k> <C-w><C-k>
-tnoremap <C-l> <C-w><C-l>
-tnoremap <C-h> <C-w><C-h>
-
-" Open nvim R terminal
-" tnoremap <localleader>t :vs | term
-" tnoremap <localleader>q <C-w>q
-
+" GET FILE LANAGUAGE
+function! GetLanguage()
+    if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
+        let language = "r"
+    elseif &ft == "python"
+        let language = "python"
+    else
+        let language = "bash"
+    endif
+    return language
+endfunction
 
 
+" OPEN SUITABLE TERMINAL FOR FILETYPE
+function! OpenTerminal() abort
+  let starting_window = bufwinnr(bufname('%'))
+  :execute ':vertical terminal ++close ++norestore ' . language
+  :execute starting_window 'wincmd w'
+  :SlimeConfig
+endfunction
 
-" Learders: {{{1
+
+" CLOSE TERMINAL
+function! CloseTerminal() abort
+    let language = GetLanguage()
+    if language == "r"
+        :SlimeSend1 quit(save = "no")
+    elseif language == "python"
+        :SlimeSend1 exit()
+    else
+        :SlimeSend1 exit
+    endif
+endfunction
+
+
+" LEADERS: {{{1
 let maplocalleader=','
 let mapleader=" "
 nmap <leader>v :source $MYVIMRC <CR>
 
 
-" Plugins: {{{1
+" PLUGINS: {{{1
 
-" VimPlug: {{{2
+" --VIMPUG: {{{1
 source ~/.dotfiles/nvim/plugins/vimplug.vim
 
 call plug#begin('~/.vim/plugged')
@@ -33,9 +54,10 @@ Plug 'rakr/vim-one'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
-Plug 'jiangmiao/auto-pairs'
-Plug 'preservim/nerdcommenter'
-
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 
 call plug#end()
@@ -43,7 +65,7 @@ call plug#end()
 
 
 
-" NerTree: {{{2
+" --NERDTREE: {{{1
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let g:NERDTreeDirArrowExpandable='▷'
@@ -53,7 +75,7 @@ nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' 
 nmap <leader>N :NERDTreeFind
 
 
-" COC: {{{2
+" --COC: {{{1
 
 let g:coc_global_extensions = [
       \ 'coc-r-lsp',
@@ -69,63 +91,111 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
-
+inoremap <silent><expr> <c-space> coc#refresh()
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Slime: {{{2
+" --SLIME: {{{1
 
 let g:slime_target = "neovim"
 "let g:slime_default_config = {"term_finish": "close", "vertical": 1 }
 
+" OPEN DIFFERENT VIM-TERMINALS:
+nnoremap <localleader>r :vs <bar> term R<CR><C-w>h
+nnoremap <localleader>p :vs <bar> term python<CR>
+nnoremap <localleader>t :vs <bar> term<CR>
+
+" CLOSE THE RIGHT MOST TERMINAL
+nnoremap <localleader>q <C-w>l :q<CR>
+
+" SAVE WITH 'CRTL+S'
+inoremap <C-s> <C-o>:w<CR>i
+nnoremap <C-s> :w<CR>
+
+" RUN CODE WITH 'CTLR+ENTER'
+inoremap <C-CR> <C-o><plug>SlimeLineSend<Down>
+nnoremap <C-CR> <plug>SlimeLineSend<Down>
+vnoremap <C-CR> <plug>SlimeRegionSend
+
+" inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
+" nnoremap <C-CR> <plug>SlimeSendSlimeSend
+inoremap <C-h> <C-o>:call PrintHead()<CR>
+nnoremap <C-h> :call PrintHead()<CR>
+
+
+" EXIT TERMINAL WITH 'ESC'
+tnoremap <Esc> <C-\><C-n>
+
+" Also allow line-wise scrolling
+inoremap <C-e> <C-o><C-e>
+inoremap <C-y> <C-o><C-y>
 
 
 
 
 
-" Colors: {{{1
+
+" COLORS: {{{1
 colorscheme one
 set background=dark
 
 
 
 
-" Backup {{{1
+" BACKUP {{{1
 set nobackup
 set noswapfile
 set nowb
 
 
-" Folds and Tabs: {{{1
 
 
 
+
+" KEY MAPPINGS: {{{1
+
+
+" Use CTRL-<hjkl> to move between vim terminals
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-l> <C-o>l
+
+
+" SETTINGS: {{{1
 
 set foldmethod=marker
-
 set scrolloff=5
-
 set showcmd
 syntax enable
 set termguicolors
-
-" 
 set number
 set relativenumber
-
 set cursorline
 
 
+set showtabline=2
+
+
+" 
 set tabstop=2
 set smarttab
 set autoindent
 set expandtab
 set shiftwidth=2
+
 set splitright
 set clipboard=unnamed
 
-
+set nocompatible
+set mouse=a
 
 " 
 
