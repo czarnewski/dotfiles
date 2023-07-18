@@ -4,7 +4,7 @@
 ###############
 
 # FOLDERS AND FILES
-alias ll='ls -ahoG'
+alias ll='ls -ahoG --color'
 alias cd..='cd ..'
 alias cd.='cd ..'
 alias disks='lsblk'

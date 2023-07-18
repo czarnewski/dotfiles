@@ -17,9 +17,9 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 ####################
 ### EXPORT PATHS ###
 ####################
-export PATH="~/Library/Python/latest/bin:$PATH"
-export PATH=$PATH:$HOME/edirect
-
+export PATH="$HOME/Library/Python/latest/bin:$PATH"
+export PATH="$HOME/edirect:$PATH"
+export PATH="$HOME/opt/nvim:$PATH"
 
 
 # >>> conda initialize >>>
@@ -38,7 +38,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f $HOME'/Downloads/google-cloud-sdk/path.bash.inc' ]; then . $HOME'/Downloads/google-cloud-sdk/path.bash.inc'; fi

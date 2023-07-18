@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # BASH
-ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
+ln -sfn $HOME/.dotfiles/bash/bash_profile $HOME/.bash_profile
 
 # NEOVIM
-# mkdir -p ~/.config/nvim
-ln -sfn ~/.dotfiles/nvim ~/.config/nvim
-# ln -sfn ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-# ln -sfn ~/.dotfiles/nvim/plugins ~/.config/nvim/
+mkdir -p $HOME/.config/nvim
+ln -sfn $HOME/.dotfiles/nvim $HOME/.config/nvim
+alias nvim='~/opt/nvim'
+
+
+# TMUX
+ln -sfn $HOME/.dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 
 
