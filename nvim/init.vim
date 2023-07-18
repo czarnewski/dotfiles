@@ -54,9 +54,9 @@ Plug 'rakr/vim-one'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 " Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
 
@@ -195,7 +195,7 @@ set splitright
 set clipboard=unnamed
 
 set nocompatible
-set mouse=a
+set mouse=ar
 
 " 
 
