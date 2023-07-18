@@ -13,3 +13,6 @@ alias nvim='~/opt/nvim'
 ln -sfn $HOME/.dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 
 
+# ALACRITTY
+ln -sfn $HOME/.dotfiles/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+

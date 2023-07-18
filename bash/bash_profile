@@ -38,7 +38,10 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ $(uname) == 'Darwin' ]; then 
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f $HOME'/Downloads/google-cloud-sdk/path.bash.inc' ]; then . $HOME'/Downloads/google-cloud-sdk/path.bash.inc'; fi
