@@ -22,6 +22,11 @@ export PATH="$HOME/edirect:$PATH"
 export PATH="$HOME/opt/nvim:$PATH"
 
 
+
+### KITTY
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$("$HOME/opt/miniconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
@@ -52,3 +57,4 @@ if [ -f $HOME'/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . $HOME'/
 
 # SETS TERMINAL LANGUAGE TO ENGLISH
 export LC_ALL=en_US.UTF-8
+export LANG=$LANG.UTF-8
