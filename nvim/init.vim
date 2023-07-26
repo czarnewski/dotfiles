@@ -191,6 +191,7 @@ set number
 set relativenumber
 set cursorline
 
+set colorcolumn=80
 
 set showtabline=2
 
@@ -203,7 +204,7 @@ set expandtab
 set shiftwidth=2
 
 set splitright
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set nocompatible
 set mouse=ar
