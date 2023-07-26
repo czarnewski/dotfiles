@@ -110,7 +110,7 @@ nnoremap <localleader>t :vs <bar> term<CR>
 nnoremap <localleader>q <C-w>l :q<CR>
 
 " SAVE WITH 'CRTL+S'
-inoremap <C-s> <C-o>:w<CR>i
+inoremap <C-s> <C-o>:w<CR>
 nnoremap <C-s> :w<CR>
 
 " RUN CODE WITH 'CTLR+ENTER'
