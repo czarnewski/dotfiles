@@ -98,13 +98,19 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 " --SLIME: {{{1
 
+ 
+" let g:slime_target = "tmux"
+" let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+" let g:slime_paste_file = expand("$HOME/.slime_paste")
+
+
 let g:slime_target = "neovim"
 "let g:slime_default_config = {"term_finish": "close", "vertical": 1 }
 
 " OPEN DIFFERENT VIM-TERMINALS:
 nnoremap <localleader>r :vs <bar> term R<CR><C-w>h
-nnoremap <localleader>p :vs <bar> term python<CR>
-nnoremap <localleader>t :vs <bar> term<CR>
+nnoremap <localleader>p :vs <bar> term python<CR><C-w>h
+nnoremap <localleader>t :vs <bar> term bash<CR><C-w>h
 
 " CLOSE THE RIGHT MOST TERMINAL
 nnoremap <localleader>q <C-w>l :q<CR>
@@ -117,6 +123,11 @@ nnoremap <C-s> :w<CR>
 inoremap <C-CR> <C-o><plug>SlimeLineSend<Down>
 nnoremap <C-CR> <plug>SlimeLineSend<Down>
 vnoremap <C-CR> <plug>SlimeRegionSend
+
+" RUN CODE WITH 'CTLR+/' - IN TMUX
+inoremap <C-\> <C-o><plug>SlimeLineSend<Down>
+nnoremap <C-\> <plug>SlimeLineSend<Down>
+vnoremap <C-\> <plug>SlimeRegionSend
 
 " inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
 " nnoremap <C-CR> <plug>SlimeSendSlimeSend
@@ -180,6 +191,7 @@ set number
 set relativenumber
 set cursorline
 
+set colorcolumn=80
 
 set showtabline=2
 
@@ -192,7 +204,7 @@ set expandtab
 set shiftwidth=2
 
 set splitright
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set nocompatible
 set mouse=ar

@@ -43,7 +43,11 @@ alias cel='conda env list'
 alias cer='conda env remove -n'
 alias cac='conda activate'
 alias cde='conda deactivate'
-alias mec='mamba env create'
+
+alias mec='mamba env create -f'
+alias meu='mamba env update -f'
+alias mer='mamba env remove -n'
+
 
 
 # GIT
