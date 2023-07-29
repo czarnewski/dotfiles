@@ -79,6 +79,8 @@ nmap <leader>N :NERDTreeFind
 
 let g:coc_global_extensions = [
       \ 'coc-r-lsp',
+      \ 'coc-sh',
+      \ 'coc-pyright',
       \ 'coc-vimlsp']
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
