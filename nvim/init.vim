@@ -101,7 +101,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 " --SLIME: {{{1
 
  
-" let g:slime_target = "tmux"
+" let g:slime_target = 'tmux'
 " let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 " let g:slime_paste_file = expand("$HOME/.slime_paste")
 
@@ -110,7 +110,7 @@ let g:slime_target = "neovim"
 "let g:slime_default_config = {"term_finish": "close", "vertical": 1 }
 
 " OPEN DIFFERENT VIM-TERMINALS:
-nnoremap <localleader>r :vs <bar> term R<CR>i<Esc><C-w>h
+nnoremap <localleader>r :vs <bar> term R<CR><C-w>h
 nnoremap <localleader>p :vs <bar> term python<CR><C-w>h
 nnoremap <localleader>t :vs <bar> term bash<CR><C-w>h
 

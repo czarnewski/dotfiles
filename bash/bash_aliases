@@ -49,12 +49,12 @@ alias meu='mamba env update -f'
 alias mer='mamba env remove -n'
 
 
-
 # GIT
 alias ga='git add'
 alias gc='git commit -m'
 alias gps='git push'
 alias gpl='git pull'
+alias gst='git status'
 
 
 # UPPMAX
