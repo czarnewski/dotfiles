@@ -20,7 +20,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="$HOME/Library/Python/latest/bin:$PATH"
 export PATH="$HOME/edirect:$PATH"
 export PATH="$HOME/opt/nvim:$PATH"
-
+export GIT_EDITOR=vim
 
 
 ### KITTY
