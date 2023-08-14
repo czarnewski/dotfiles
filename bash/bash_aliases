@@ -23,6 +23,7 @@ alias rp='nvim ~/.Rprofile'
 # BASH
 alias bp='nvim ~/.bash_profile'
 alias sbp='source ~/.bash_profile'
+alias ba='nvim ~/.dotfiles/bash/bash_aliases'
 
 
 # VIM
@@ -51,7 +52,9 @@ alias mer='mamba env remove -n'
 
 # GIT
 alias ga='git add'
+alias gadr='git add --dry-run'
 alias gc='git commit -m'
+alias gcdr='git commit --dry-run -m'
 alias gps='git push'
 alias gpl='git pull'
 alias gst='git status'
