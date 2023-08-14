@@ -46,7 +46,6 @@ nmap <leader>v :source $MYVIMRC <CR>
 
 " PLUGINS: {{{1
 
-" --VIMPUG: {{{1
 source ~/.dotfiles/nvim/plugins/vimplug.vim
 
 call plug#begin('~/.vim/plugged')
@@ -54,18 +53,19 @@ Plug 'rakr/vim-one'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
-Plug 'jiangmiao/auto-pairs'
-" Plug 'preservim/nerdcommenter'
-" Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 
 call plug#end()
 
 
 
 
-" --NERDTREE: {{{1
+" --nerdtree {{{1
+
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let g:NERDTreeDirArrowExpandable='▷'
@@ -75,7 +75,7 @@ nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<cr>' : @% == '' 
 nmap <leader>N :NERDTreeFind
 
 
-" --COC: {{{1
+" --coc {{{1
 
 let g:coc_global_extensions = [
       \ 'coc-r-lsp',
@@ -98,21 +98,19 @@ inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" --SLIME: {{{1
+" --slime {{{1
 
  
-" let g:slime_target = 'tmux'
-" let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 " let g:slime_paste_file = expand("$HOME/.slime_paste")
 
 
 let g:slime_target = "neovim"
-"let g:slime_default_config = {"term_finish": "close", "vertical": 1 }
+" let g:slime_neovim_config = { "term_finish": "close", "vertical": 4 }
 
 " OPEN DIFFERENT VIM-TERMINALS:
-nnoremap <localleader>r :vs <bar> term R<CR><C-w>h
-nnoremap <localleader>p :vs <bar> term python<CR><C-w>h
-nnoremap <localleader>t :vs <bar> term bash<CR><C-w>h
+nnoremap <localleader>r :vs <bar> term R<CR><C-w>wi<C-\><C-n><C-w>h
+nnoremap <localleader>p :vs <bar> term python<CR><C-w>wi<C-\><C-n><C-w>h
+nnoremap <localleader>t :vs <bar> term bash<CR><C-w>wi<C-\><C-n><C-w>h
 
 " CLOSE THE RIGHT MOST TERMINAL
 nnoremap <localleader>q <C-w>l :q<CR>
@@ -122,14 +120,14 @@ inoremap <C-s> <C-o>:w<CR>
 nnoremap <C-s> :w<CR>
 
 " RUN CODE WITH 'CTLR+ENTER'
-inoremap <C-CR> <C-o><plug>SlimeLineSend<Down>
-nnoremap <C-CR> <plug>SlimeLineSend<Down>
-vnoremap <C-CR> <plug>SlimeRegionSend
+" inoremap <C-CR> <C-o><plug>SlimeLineSend<Down>
+" nnoremap <C-CR> <plug>SlimeLineSend<Down>
+" vnoremap <C-CR> <plug>SlimeRegionSendgvo
 
 " RUN CODE WITH 'CTLR+/' - IN TMUX
-inoremap <C-\> <C-o><plug>SlimeLineSend<Down>
-nnoremap <C-\> <plug>SlimeLineSend<Down>
-vnoremap <C-\> <plug>SlimeRegionSend
+inoremap <C-\> <C-o><plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
+nnoremap <C-\> <plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
+vnoremap <C-\> <plug>SlimeRegionSend<C-w>wi<C-\><C-n><C-w>wgv
 
 " inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
 " nnoremap <C-CR> <plug>SlimeSendSlimeSend
@@ -144,6 +142,23 @@ tnoremap <Esc> <C-\><C-n>
 inoremap <C-e> <C-o><C-e>
 inoremap <C-y> <C-o><C-y>
 
+
+
+
+" --subversive {{{1
+
+" Substitute motion with register content
+nmap s <plug>(SubversiveSubstitute)
+
+" Substitite motion within motion with user input
+" Useful with e.g. `ie` motion, `inner entire buffer`
+nmap <leader>s <plug>(SubversiveSubstituteRange)
+xmap <leader>s <plug>(SubversiveSubstituteRange)
+
+nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
+
+" Do not move cursor after substituting
+let g:subversivePreserveCursorPosition = 1
 
 
 
@@ -168,6 +183,10 @@ set nowb
 
 " KEY MAPPINGS: {{{1
 
+
+" Leave the text highlighted after indentation
+vnoremap < <gv
+vnoremap > >gv
 
 " Use CTRL-<hjkl> to move between vim terminals
 nnoremap <C-j> <C-w>j
