@@ -48,13 +48,26 @@ if [ $(uname) == 'Darwin' ]; then
 fi
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME'/Downloads/google-cloud-sdk/path.bash.inc' ]; then . $HOME'/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME'/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . $HOME'/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
 
 # SETS TERMINAL LANGUAGE TO ENGLISH
 export LC_ALL=en_US.UTF-8
 export LANG=$LANG.UTF-8
+
+
+
+###############
+### GSUTILS ###
+###############
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/opt/google-cloud-sdk/path.bash.inc" ]; then
+  . "$HOME/opt/google-cloud-sdk/path.bash.inc" 
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/opt/google-cloud-sdk/completion.bash.inc" ]; then
+  . "$HOME/opt/google-cloud-sdk/completion.bash.inc"
+fi
+
+# This line points the Python installation to the conda one
+CLOUDSDK_PYTHON="$HOME/opt/miniconda3/bin/python"

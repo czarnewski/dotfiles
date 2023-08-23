@@ -125,9 +125,12 @@ nnoremap <C-s> :w<CR>
 " vnoremap <C-CR> <plug>SlimeRegionSendgvo
 
 " RUN CODE WITH 'CTLR+/' - IN TMUX
-inoremap <C-\> <C-o><plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
-nnoremap <C-\> <plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
-vnoremap <C-\> <plug>SlimeRegionSend<C-w>wi<C-\><C-n><C-w>wgv
+"inoremap <C-\> <C-o><plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
+"nnoremap <C-\> <plug>SlimeLineSend<C-w>wi<C-\><C-n><C-w>w<Down>
+"vnoremap <C-\> <plug>SlimeRegionSend<C-w>wi<C-\><C-n><C-w>wgv
+inoremap <C-\> <C-o><plug>SlimeLineSend<Down>
+nnoremap <C-\> <plug>SlimeLineSend<Down>
+vnoremap <C-\> <plug>SlimeRegionSend<Down>
 
 " inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
 " nnoremap <C-CR> <plug>SlimeSendSlimeSend
