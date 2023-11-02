@@ -53,11 +53,17 @@ Plug 'rakr/vim-one'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'tpope/vim-commentary'
-Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+" Plug 'preservim/nerdcommenter'
+" Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
+
+
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'preservim/vim-indent-guides'
+" Plug 'Yggdroot/indentLine'
+
 
 call plug#end()
 
@@ -165,7 +171,10 @@ let g:subversivePreserveCursorPosition = 1
 
 
 
+" --indent guide {{{1
 
+" let g:indent_guides_enable_on_vim_startup = 1
+lua require("ibl").setup()
 
 " COLORS: {{{1
 colorscheme one
@@ -228,10 +237,17 @@ set expandtab
 set shiftwidth=2
 
 set splitright
-set clipboard=unnamedplus
+set clipboard
 
 set nocompatible
 set mouse=ar
+
+
+
+filetype plugin on
+au BufNewFile,BufRead * if &ft == '' | set ft=bahs | endif
+
+
 
 " 
 
