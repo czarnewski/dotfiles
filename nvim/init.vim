@@ -59,6 +59,10 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 
+Plug 'mzlogin/vim-markdown-toc'
+
+
+
 call plug#end()
 
 
@@ -130,7 +134,7 @@ nnoremap <C-s> :w<CR>
 "vnoremap <C-\> <plug>SlimeRegionSend<C-w>wi<C-\><C-n><C-w>wgv
 inoremap <C-\> <C-o><plug>SlimeLineSend<Down>
 nnoremap <C-\> <plug>SlimeLineSend<Down>
-vnoremap <C-\> <plug>SlimeRegionSend<Down>
+vnoremap <C-\> <plug>SlimeRegionSend
 
 " inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
 " nnoremap <C-CR> <plug>SlimeSendSlimeSend

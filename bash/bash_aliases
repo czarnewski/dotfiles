@@ -12,7 +12,7 @@ alias disks='lsblk'
 
 # DEEPLIFE
 PBS='paucza@89.225.233.66'
-alias pbs='ssh -p 10023 $PBS'
+alias pbs='ssh -Y -p 10023 $PBS'
 
 
 # VSCODE
