@@ -55,18 +55,18 @@ Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-" Plug 'preservim/nerdcommenter'
-" Plug 'tpope/vim-surround'
-Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
+Plug 'tpope/vim-fugitive'
 
+Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'preservim/vim-indent-guides'
-" Plug 'Yggdroot/indentLine'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'itchyny/lightline.vim'
 
 
 call plug#end()
-
 
 
 
@@ -88,21 +88,23 @@ let g:coc_global_extensions = [
       \ 'coc-sh',
       \ 'coc-pyright',
       \ 'coc-vimlsp']
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
+
+" " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" " delays and poor user experience.
 set updatetime=300
 
-" Don't pass messages to |ins-completion-menu|.
+" " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+" " Always show the signcolumn, otherwise it would shift the text each time
+" " diagnostics appear/become resolved.
 set signcolumn=yes
+
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " --slime {{{1
 
@@ -176,7 +178,16 @@ let g:subversivePreserveCursorPosition = 1
 " let g:indent_guides_enable_on_vim_startup = 1
 lua require("ibl").setup()
 
-" COLORS: {{{1
+
+" --telescope {{{1
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+
+"COLORS: {{{1
 colorscheme one
 set background=dark
 
@@ -213,6 +224,19 @@ inoremap <C-k> <C-o>k
 inoremap <C-l> <C-o>l
 
 
+
+" Use CTRL-<hjkl> to move between vim terminals
+nnoremap <leader><Down> <C-w>j
+nnoremap <leader><Up> <C-w>k
+nnoremap <leader><Right> <C-w>l
+nnoremap <leader><Left> <C-w>h
+
+" Movement in insert mode
+nnoremap <C-Down> <C-o>j
+nnoremap <C-Up> <C-o>k
+nnoremap <C-Right> <C-o>l
+nnoremap <C-Left> <C-o>h
+
 " SETTINGS: {{{1
 
 set foldmethod=marker
@@ -237,7 +261,7 @@ set expandtab
 set shiftwidth=2
 
 set splitright
-set clipboard
+set clipboard=unnamedplus
 
 set nocompatible
 set mouse=ar
