@@ -26,9 +26,12 @@ alias sbp='source ~/.bash_profile'
 alias ba='nvim ~/.dotfiles/bash/bash_aliases'
 
 
-# VIM
+# ALACRITTY
 alias ap='nvim ~/.config/alacritty/alacritty.yml'
 
+
+# KITTY
+alias icat='kitten icat'
 
 # VIM
 alias vp='nvim ~/.dotfiles/nvim/init.vim'

@@ -59,12 +59,17 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'itchyny/lightline.vim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
 
+Plug 'itchyny/lightline.vim'
+Plug 'edluffy/hologram.nvim'
 
 call plug#end()
 
@@ -180,6 +185,7 @@ lua require("ibl").setup()
 
 
 " --telescope {{{1
+"
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -187,7 +193,14 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
-"COLORS: {{{1
+lua require('telescope').load_extension('media_files')
+lua require('telescope').setup {extensions={media_files={filetypes={"png", "jpg", "mp4", "webm", "pdf"}, find_cmd = "fd"}}}
+
+" --hologram {{{1
+
+lua require('hologram').setup{auto_display = false}
+
+" COLORS: {{{1
 colorscheme one
 set background=dark
 
