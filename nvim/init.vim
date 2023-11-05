@@ -140,10 +140,41 @@ inoremap <C-\> <C-o><plug>SlimeLineSend<Down>
 nnoremap <C-\> <plug>SlimeLineSend<Down>
 vnoremap <C-\> <plug>SlimeRegionSend
 
+
+" Function: get the appropriate language for the current filetype {{{3
+function! GetLanguage()
+    if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
+        let language = "r"
+    elseif &ft == "python"
+        let language = "python"
+    else
+        let language = "bash"
+    endif
+    return language
+endfunction
+
+
+
+" Function: print the head of a pandas/R dataframe {{{3
+function! PrintHead() abort
+    " Get language of current filetype
+    let language = GetLanguage()
+    " Get the word under the cursor
+    let current_word = expand("<cword>")
+    " Send appropriate command to REPL
+    if language == "r"
+        :SlimeSend0 "head(" . current_word . ")\n"
+    elseif language == "python"
+        :SlimeSend0 current_word . ".head()\n"
+    else
+        :echo "Error: requires Python or R"
+    endif
+endfunction
+
+
 " inoremap <C-CR> <C-o><plug>SlimeSendSlimeSend
 " nnoremap <C-CR> <plug>SlimeSendSlimeSend
-inoremap <C-h> <C-o>:call PrintHead()<CR>
-nnoremap <C-h> :call PrintHead()<CR>
+nmap <localleader>h :call PrintHead()<CR>
 
 
 " EXIT TERMINAL WITH 'ESC'
