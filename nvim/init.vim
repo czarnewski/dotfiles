@@ -55,7 +55,6 @@ Plug 'jpalardy/vim-slime'
 Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 
 Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 Plug 'mzlogin/vim-markdown-toc'
@@ -68,8 +67,15 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'itchyny/vim-gitbranch'
+" Plug 'tpope/vim-fugitive'
+" Status line
 Plug 'itchyny/lightline.vim'
+
 Plug 'edluffy/hologram.nvim'
+
+
 
 call plug#end()
 
@@ -185,7 +191,6 @@ lua require("ibl").setup()
 
 
 " --telescope {{{1
-"
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -195,10 +200,27 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 lua require('telescope').load_extension('media_files')
 lua require('telescope').setup {extensions={media_files={filetypes={"png", "jpg", "mp4", "webm", "pdf"}, find_cmd = "fd"}}}
+" --gitsigns {{{1
+
+lua require('gitsigns').setup()
+
 
 " --hologram {{{1
 
 lua require('hologram').setup{auto_display = false}
+
+" --lightline {{{1
+
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 
 " COLORS: {{{1
 colorscheme one
