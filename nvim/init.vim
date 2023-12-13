@@ -65,7 +65,14 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
+
+Plug 'quarto-dev/quarto-nvim'
+Plug 'jmbuhr/otter.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'neovim/nvim-lspconfig'
+"Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'itchyny/vim-gitbranch'
@@ -191,15 +198,20 @@ lua require("ibl").setup()
 
 
 " --telescope {{{1
+
+lua require('telescope').load_extension('media_files')
+" lua require('telescope').setup{}
+
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
+" lua require('telescope').load_extension('media_files')
+" lua require("telescope").load_extension("file_browser")
+" lua require('telescope').setup {extensions={media_files={filetypes={"png", "jpg", "mp4", "webm", "pdf"}, find_cmd = "fd"} } }
 
-lua require('telescope').load_extension('media_files')
-lua require('telescope').setup {extensions={media_files={filetypes={"png", "jpg", "mp4", "webm", "pdf"}, find_cmd = "fd"}}}
 " --gitsigns {{{1
 
 lua require('gitsigns').setup()
@@ -221,6 +233,12 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+
+
+" --quarto {{{1
+
+lua require('quarto').setup()
+
 
 " COLORS: {{{1
 colorscheme one

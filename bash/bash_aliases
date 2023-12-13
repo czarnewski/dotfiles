@@ -3,6 +3,8 @@
 ### ALIASES ###
 ###############
 
+
+
 # FOLDERS AND FILES
 alias ll='ls -ahoG --color'
 alias cd..='cd ..'
@@ -13,6 +15,10 @@ alias disks='lsblk'
 # DEEPLIFE
 PBS='paucza@89.225.233.66'
 alias pbs='ssh -Y -p 10023 $PBS'
+alias ctp='ssh -N -f -L localhost:5001:localhost:5001 $PBS'
+
+
+
 
 
 # VSCODE
@@ -39,6 +45,7 @@ alias scim='sc-im'
 
 
 # TMUX
+alias tn='tmux new bash'
 alias tp='nvim ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tk='tmux kill-server'
@@ -54,7 +61,7 @@ alias cde='conda deactivate'
 
 alias mec='mamba env create -f'
 alias meu='mamba env update -f'
-alias mer='mamba env remove -n'
+alias mer='conda env remove -n'
 
 
 # GIT
