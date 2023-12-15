@@ -30,7 +30,7 @@
       "languageserver::run()"
     ],
     "filetypes": [
-      "r"
+      ["r","qmd","rmd"]
     ]
   }
 }
