@@ -66,9 +66,19 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'chrisbra/csv.vim'
+Plug 'dhruvasagar/vim-table-mode'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+
 
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'itchyny/vim-gitbranch'
+" Plug 'itchyny/vim-gitbranch'
 " Plug 'tpope/vim-fugitive'
 " Status line
 Plug 'itchyny/lightline.vim'
@@ -93,6 +103,13 @@ nmap <leader>N :NERDTreeFind
 
 
 " --coc {{{1
+
+
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 
 let g:coc_global_extensions = [
       \ 'coc-r-lsp',
@@ -128,6 +145,7 @@ let g:slime_target = "neovim"
 
 " OPEN DIFFERENT VIM-TERMINALS:
 nnoremap <localleader>r :vs <bar> term R<CR><C-w>wi<C-\><C-n><C-w>h
+nnoremap <localleader>R :vs <bar> term radian<CR><C-w>wi<C-\><C-n><C-w>h
 nnoremap <localleader>p :vs <bar> term python<CR><C-w>wi<C-\><C-n><C-w>h
 nnoremap <localleader>t :vs <bar> term bash<CR><C-w>wi<C-\><C-n><C-w>h
 
@@ -230,7 +248,20 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
 lua require('telescope').load_extension('media_files')
-lua require('telescope').setup {extensions={media_files={filetypes={"png", "jpg", "mp4", "webm", "pdf"}, find_cmd = "fd"}}}
+
+lua << EOF
+require('telescope').setup {
+	extensions={
+		media_files={
+			filetypes={"png", "jpg", "mp4", "webm", "pdf"},
+			find_cmd = "fd"}
+	}
+}
+EOF
+
+" lua require('telescope').load_extension('fzf')
+
+
 " --gitsigns {{{1
 
 lua require('gitsigns').setup()
@@ -242,7 +273,6 @@ lua require('hologram').setup{auto_display = false}
 
 " --lightline {{{1
 
-
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -253,7 +283,57 @@ let g:lightline = {
       \ },
       \ }
 
+
+
+" --treesitter {{{1
+
+lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = { 
+			"c", "lua", "vim", "vimdoc", "query", "typescript",
+			"r", "python", "bash", "css", "javascript", "markdown",
+			"markdown_inline", "markdown" },
+		context_commentstring = {	enable = true	},
+		highlight = {	enable = true	},
+		indent = { enable = true },
+		sync_install = false,
+    auto_install = true,
+  }
+EOF
+
+lua vim.treesitter.language.register('bash', 'bats')
+
+
+" --csv{{{1
+
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+
+
+" filetype plugin on
+" if exists("did_load_csvfiletype")
+"   finish
+" endif
+" let did_load_csvfiletype=1
+
+" au BufRead,BufNewFile *.csv,*.dat set ft=csv
+
+"--markdown-preview {{{1
+let g:mkdp_port = '3970'
+
 " COLORS: {{{1
+
 colorscheme one
 set background=dark
 
@@ -308,35 +388,41 @@ nnoremap <C-Left> <C-o>h
 set foldmethod=marker
 set scrolloff=5
 set showcmd
+
 syntax enable
 set termguicolors
+
+
+" Number lines
 set number
 set relativenumber
 set cursorline
 
 set colorcolumn=80
 
+
+" TAB configurations
+set noexpandtab
 set showtabline=2
-
-
-" 
 set tabstop=2
+set softtabstop=2
 set smarttab
 set autoindent
-set expandtab
-set shiftwidth=2
+set smartindent
+set shiftwidth=0
+
+
 
 set splitright
 set clipboard=unnamedplus
-
 set nocompatible
 set mouse=ar
 
 
 
 filetype plugin on
-au BufNewFile,BufRead * if &ft == '' | set ft=bahs | endif
-
+au BufNewFile,BufRead * if &ft == '' | set ft=bash | endif
+au BufReadPost *.bats set syntax=sh
 
 
 " 

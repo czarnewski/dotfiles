@@ -5,6 +5,7 @@
 
 # FOLDERS AND FILES
 alias ll='ls -ahoG --color'
+alias lll='ls -1a --color'
 alias cd..='cd ..'
 alias cd.='cd ..'
 alias disks='lsblk'
@@ -13,6 +14,13 @@ alias disks='lsblk'
 # DEEPLIFE
 PBS='paucza@89.225.233.66'
 alias pbs='ssh -Y -p 10023 $PBS'
+function ftphost(){
+	python3 -m http.server $1 
+}
+function ftpcon(){
+	ssh -N -f -L localhost:{$1}:localhost:{$1} {$PBS}
+}
+
 
 
 # VSCODE
@@ -54,17 +62,21 @@ alias cde='conda deactivate'
 
 alias mec='mamba env create -f'
 alias meu='mamba env update -f'
-alias mer='mamba env remove -n'
+alias mer='conda env remove -n'
 
 
 # GIT
 alias ga='git add'
-alias gadr='git add --dry-run'
 alias gc='git commit -m'
+alias gadr='git add --dry-run'
 alias gcdr='git commit --dry-run -m'
 alias gps='git push'
 alias gpl='git pull'
 alias gst='git status'
+alias gb='git branch'
+alias gco='git checkout'
+alias gsw='git switch -c'
+alias gpr='gh pr create --base'
 
 
 # UPPMAX
@@ -86,4 +98,39 @@ alias op='opa; ~/opt/octoprint/bin/octoprint serve'
 
 # SOFTWARE
 alias chrome="open -e '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'"
+
+
+
+# ATLAS
+ATLAS='/atlas'
+alias atlas="cd $ATLAS"
+alias cdsou="cd $ATLAS/01_data/00_source"
+alias cdraw="cd $ATLAS/01_data/01_raw"
+alias cdsta="cd $ATLAS/01_data/02_staging"
+alias cdcle="cd $ATLAS/01_data/03_clean"
+alias cdpro="cd $ATLAS/01_data/04_projected"
+alias cdbot="cd $ATLAS/03_bots/src"
+alias cdexp="cd $ATLAS/07_export"
+alias cdres="cd $ATLAS/06_results"
+alias cdnor="cd $ATLAS/06_results/00_normadata"
+alias cdfea="cd $ATLAS/06_results/01_obs_metadata"
+alias cdfea="cd $ATLAS/06_results/02_feat_metadata"
+alias cdpca="cd $ATLAS/06_results/03_pca"
+alias cdica="cd $ATLAS/06_results/04_ica"
+alias cdint="cd $ATLAS/06_results/05_integration"
+alias cdvis="cd $ATLAS/06_results/06_visualisation"
+alias cdknn="cd $ATLAS/06_results/07_knn"
+alias cdclu="cd $ATLAS/06_results/08_clustering"
+alias cdclu="cd $ATLAS/06_results/09_module"
+alias cdtes="cd $ATLAS/tests"
+
+RESOURCES="/sw/resources"
+alias cdreso="cd $RESOURCES"
+alias cdresbot="cd $RESOURCES/03_bots"
+alias cdgen="cd $RESOURCES/01_data/genomes"
+alias cdont="cd $RESOURCES/01_data/ontologies"
+alias cdoth="cd $RESOURCES/01_data/orthologs"
+alias cdpub="cd $RESOURCES/01_data/pubmed"
+
+
 
