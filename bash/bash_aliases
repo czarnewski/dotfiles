@@ -3,6 +3,8 @@
 ### ALIASES ###
 ###############
 
+
+
 # FOLDERS AND FILES
 alias ll='ls -ahoG --color'
 alias lll='ls -1a --color'
@@ -20,7 +22,7 @@ function ftphost(){
 function ftpcon(){
 	ssh -N -f -L localhost:{$1}:localhost:{$1} {$PBS}
 }
-
+alias ctp='ssh -N -f -L localhost:${1}:localhost:${1} $PBS'
 
 
 # VSCODE
@@ -47,6 +49,7 @@ alias scim='sc-im'
 
 
 # TMUX
+alias tn='tmux new bash'
 alias tp='nvim ~/.tmux.conf'
 alias ta='tmux attach -t'
 alias tk='tmux kill-server'
